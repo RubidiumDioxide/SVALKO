@@ -65,32 +65,64 @@ PartController.searchParts = async function(req, res){
 PartController.addPart = async function(req, res){
   const part = req.body; 
 
-  console.log(req.body); 
-  
-
-  /*try{
-    const queryRes = await ConnectAndQuery(config, 
-      `SELECT * FROM [PART] 
-        WHERE [Name] LIKE '%${params.name}%' 
-          AND [PartNumber] LIKE '%${params.partNumber}%' 
-          AND [Manufacturer] LIKE '%${params.manufacturer}%' `); 
-    
-    res.json(queryRes);
+  if(hasEmptyOrNullValues(part)){
+    res.status(400).json({ message: 'Sent an empty form' });
   }
-  catch{
+
+  try{
+    const queryRes = await ConnectAndQuery(config, 
+      `INSERT INTO [PART] VALUES
+	      ('${part.name}', '${part.manufacturer}', '${part.partNumber}','${part.category}', ${Number(part.price)}, ${Number(part.quantity)}, null) `); 
+        
+    res.status(200).json("ok");
+  }
+  catch(error){
     console.error("Database query error:", error);
         res.status(500).json({ message: 'Server Error' });
-  }*/
+  }
 }
 
+// DELETE: delete a part
+PartController.deletePart = async function(req, res){
+  const id = req.params.id; 
+  
+  try{
+    const queryRes = await ConnectAndQuery(config, 
+      `DELETE FROM [PART] 
+	      WHERE [ID] = ${Number(id)}`); 
 
-//GET: get one part by id. Don't know if it works or not yet. 
-/*PartController.getPart = async function(req, res, id){
-  var queryRes = await ConnectAndQuery(config, `SELECT * FROM [PART] WHERE [ID] = ${id}`); 
+    res.status(200).json("ok");
+  }
+  catch(error){
+    console.error("Database query error:", error);
+        res.status(500).json({ message: 'Server Error' });
+  }
+}
 
-  res.send(queryRes);
-  return
-}*/
+// PUT: edit a part 
+PartController.editPart = async function(req, res){
+  const id = req.params.id; 
+  const part = req.body; 
+
+  try{
+    const queryRes = await ConnectAndQuery(config, 
+      `UPDATE [PART] 
+	      SET 
+          [Name] = '${part.Name}',
+          [Manufacturer] = '${part.Manufacturer}',
+          [PartNumber] = '${part.PartNumber}',
+          [Category] = '${part.Category}',
+          [Price] = ${Number(part.Price)},
+          [Quantity] = ${Number(part.Quantity)}
+	      WHERE [ID] =  ${Number(id)}`); 
+
+    res.status(200).json("ok");
+  }
+  catch(error){
+    console.error("Database query error:", error);
+        res.status(500).json({ message: 'Server Error' });
+  }
+} 
 
 
 function hasEmptyOrNullValues(obj) {

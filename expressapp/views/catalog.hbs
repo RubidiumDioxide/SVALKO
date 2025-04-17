@@ -39,9 +39,32 @@
 </form>
 
 <!-- Редактировать -->
+<form id="edit_form" onsubmit="editPart(event)" >
+  <input type="text" id="Name_edit_input" name=" name" placeholder="название детали" value="">
+  <input type="text" id="PartNumber_edit_input" name="partNumber" placeholder="номер детали" value="">
+  <input type="text" id="Manufacturer_edit_input" name="manufacturer" placeholder="производитель" value="">
+  <select name="category" id="Category_edit_input">
+    <option value="" disabled selected>Выберите категорию</option>
+    <option value="Фильтры">Фильтры</option>
+    <option value="Тормозная система и гидравлика">Тормозная система и гидравлика</option>
+    <option value="Подвеска">Подвеска</option>
+    <option value="Рулевое управление">Рулевое управление</option>
+    <option value="Двигатель">Двигатель</option>
+    <option value="Электросистемы">Электросистемы</option>
+    <option value="Привод ГРМ и агрегатов">Привод ГРМ и агрегатов</option>
+    <option value="Система охлаждения и кондиционирования">Система охлаждения и кондиционирования</option>
+    <option value="Стеклоочистители">Стеклоочистители</option>
+    <option value="Топливно-воздушная система">Топливно-воздушная система</option>
+    <option value="Трансмиссия">Трансмиссия</option>
+  </select>
+  <input type="text" id="Price_edit_input" name="price" placeholder="стоимость" value="">
+  <input type="text" id="Quantity_edit_input" name="quantity" placeholder="кол-во на складе" value="">
+
+  <button type="submit">Сохранить</button> 
+</form>
 
 <!-- Удалить -->
-
+<!-- Реализовано в part.hbs -->
 
 <table>
   <th>Название</th>
@@ -50,6 +73,8 @@
   <th>Раздел</th>
   <th>Цена</th>
   <th>Кол-во на складе</th>
+  <th></th>
+  <th></th>
   <tbody id="result"></tbody>
 </table>
 

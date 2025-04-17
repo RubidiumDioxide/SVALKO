@@ -40,6 +40,8 @@ hbs.registerPartials("./views/partials");
 app.get("/api/parts", PartController.getParts);
 app.get("/api/parts/search", PartController.searchParts);
 app.post("/api/parts", PartController.addPart);
+app.delete("/api/parts/:id", PartController.deletePart);
+app.put("/api/parts/:id", PartController.editPart);
 
 // pages routing
 app.use("/contact", function(_, response){
