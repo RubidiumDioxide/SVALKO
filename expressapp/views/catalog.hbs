@@ -1,0 +1,57 @@
+<p>СВАЛ.КО<p>
+
+<!--button oncLick="GetParts()">Перезагрузить каталог</button--> 
+
+<!-- Поиск -->
+<form onsubmit="SearchParts(event)">
+  <input type="text" id="name_search_input" name=" name" placeholder="название детали" value="">
+  <input type="text" id="partNumber_search_input" name="partNumber" placeholder="номер детали" value="">
+  <input type="text" id="manufacturer_search_input" name="manufacturer" placeholder="производитель" value="">
+
+  <button type="submit">Найти</button> 
+</form>
+
+<!-- Добавить -->
+<button onclick="changeAddState()">Добавить деталь</button>
+
+<form id="add_form" onsubmit="AddPart(event)" >
+  <input type="text" id="name_add_input" name=" name" placeholder="название детали" value="">
+  <input type="text" id="partNumber_add_input" name="partNumber" placeholder="номер детали" value="">
+  <input type="text" id="manufacturer_add_input" name="manufacturer" placeholder="производитель" value="">
+  <select name="category" id="category_add_input">
+    <option value="" disabled selected>Выберите категорию</option>
+    <option value="Фильтры">Фильтры</option>
+    <option value="Тормозная система и гидравлика">Тормозная система и гидравлика</option>
+    <option value="Подвеска">Подвеска</option>
+    <option value="Рулевое управление">Рулевое управление</option>
+    <option value="Двигатель">Двигатель</option>
+    <option value="Электросистемы">Электросистемы</option>
+    <option value="Привод ГРМ и агрегатов">Привод ГРМ и агрегатов</option>
+    <option value="Система охлаждения и кондиционирования">Система охлаждения и кондиционирования</option>
+    <option value="Стеклоочистители">Стеклоочистители</option>
+    <option value="Топливно-воздушная система">Топливно-воздушная система</option>
+    <option value="Трансмиссия">Трансмиссия</option>
+  </select>
+  <input type="text" id="price_add_input" name="price" placeholder="стоимость" value="">
+  <input type="text" id="quantity_add_input" name="quantity" placeholder="кол-во на складе" value="">
+
+  <button type="submit">Добавить</button> 
+</form>
+
+<!-- Редактировать -->
+
+<!-- Удалить -->
+
+
+<table>
+  <th>Название</th>
+  <th>Производитель</th>
+  <th>VIN</th>
+  <th>Раздел</th>
+  <th>Цена</th>
+  <th>Кол-во на складе</th>
+  <tbody id="result"></tbody>
+</table>
+
+<script src="script.js"></script>
+

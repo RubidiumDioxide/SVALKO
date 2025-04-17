@@ -1,0 +1,9 @@
+Система контроля версий — git, допускается использование
+https://github.com/.
+Model-View-Controller.
+Разработка web-клиента с применением html, css, JavaScript, jQuery,
+Mocha, Handlebars. 
+Разработка web-сервера с применением JSON, AJAX, Node.js, Express и
+NPM. 
+
+Клиент серверное приложение «Автомобильные запчасти»

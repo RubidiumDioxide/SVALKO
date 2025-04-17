@@ -1,0 +1,111 @@
+/* General Body Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4; /* Light background for contrast */
+  color: #333; /* Dark text color for readability */
+  margin: 0;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background for content area */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dddddd; /* Light gray border */
+}
+
+th {
+  background-color: #004F85; /* GM blue */
+  color: #ffffff; /* White text */
+}
+
+/* Input Styles */
+input[type="text"],
+input[type="number"],
+select {
+  padding: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border: 1px solid #cccccc; /* Light gray border */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border-color: #004F85; /* GM blue */
+  box-shadow: 0 0 5px rgba(0, 79, 133, 0.5); /* Subtle blue shadow */
+}
+
+/* Button Styles */
+button {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #004F85; /* GM blue */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #003366; /* Darker blue for hover effect */
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+/* Header Styles */
+header {
+  background-color: #004F85; /* GM blue */
+  color: #ffffff; /* White text */
+  padding: 20px; /* Padding for spacing */
+  border-radius: 8px 8px 0 0; /* Rounded corners at the top */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Navigation Styles */
+nav {
+  margin-top: 15px; /* Space above navigation */
+  text-align: center; /* Center navigation items */
+}
+
+nav a {
+  background-color: #004F85; /* GM blue */
+  color: #ffffff; /* White text for links */
+  text-decoration: none; /* Remove underline */
+  padding: 10px 15px; /* Padding for clickable area */
+  border-radius: 4px; /* Rounded corners for links */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+nav a:hover {
+  background-color: #003366; /* Darker blue for hover effect */
+}
