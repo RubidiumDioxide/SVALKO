@@ -38,6 +38,7 @@ th {
 /* Input Styles */
 input[type="text"],
 input[type="number"],
+input[type="password"],
 select {
   padding: 10px;
   margin-top: 2px;

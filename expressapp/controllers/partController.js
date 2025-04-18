@@ -1,35 +1,9 @@
-const { partials } = require("handlebars");
-const Part = require("../models/part.js"); 
-const sql = require("mssql"); 
-
-const config = {
-  user: 'sa',      
-  password: '1234',   
-  server: 'localhost',    
-  database: 'svalko_DB',    
-  options: {
-      encrypt: false, 
-      trustServerCertificate: true 
-  }
-};
-
-async function ConnectAndQuery(config, query) {
-  try {
-      await sql.connect(config);
-      const result = await sql.query(query);
-      return result.recordset; 
-  } catch (err) {
-      return('SQL error ' + err);
-  } finally {
-      await sql.close();
-  }
-}
-
+const ConnectAndQuery = require("../db/DB.js"); 
 PartController = {} ;
 
 //GET: get all parts
 PartController.getParts = async function(req, res){
-  var queryRes = await ConnectAndQuery(config, 
+  var queryRes = await ConnectAndQuery( 
     "SELECT * FROM [PART]"); 
 
   res.send(queryRes);
@@ -47,7 +21,7 @@ PartController.searchParts = async function(req, res){
   console.log(`${params.name} ${params.partNumber} ${params.manufacturer}`);
 
   try{
-    const queryRes = await ConnectAndQuery(config, 
+    const queryRes = await ConnectAndQuery(
       `SELECT * FROM [PART] 
         WHERE [Name] LIKE '%${params.name}%' 
           AND [PartNumber] LIKE '%${params.partNumber}%' 
@@ -68,7 +42,7 @@ PartController.sortParts = async function(req, res){
   console.log(column); 
 
   try{
-    const queryRes = await ConnectAndQuery(config, 
+    const queryRes = await ConnectAndQuery(
       `SELECT * FROM [PART]
       ORDER BY [${column}]`); 
     
@@ -89,7 +63,7 @@ PartController.addPart = async function(req, res){
   }
 
   try{
-    const queryRes = await ConnectAndQuery(config, 
+    const queryRes = await ConnectAndQuery(
       `INSERT INTO [PART] VALUES
 	      ('${part.name}', '${part.manufacturer}', '${part.partNumber}','${part.category}', ${Number(part.price)}, ${Number(part.quantity)}, null) `); 
         
@@ -106,7 +80,7 @@ PartController.deletePart = async function(req, res){
   const id = req.params.id; 
   
   try{
-    const queryRes = await ConnectAndQuery(config, 
+    const queryRes = await ConnectAndQuery(
       `DELETE FROM [PART] 
 	      WHERE [ID] = ${Number(id)}`); 
 
@@ -124,7 +98,7 @@ PartController.editPart = async function(req, res){
   const part = req.body; 
 
   try{
-    const queryRes = await ConnectAndQuery(config, 
+    const queryRes = await ConnectAndQuery(
       `UPDATE [PART] 
 	      SET 
           [Name] = '${part.Name}',

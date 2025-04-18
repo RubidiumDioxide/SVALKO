@@ -3,6 +3,7 @@ const expressHbs = require("express-handlebars");
 const hbs = require("hbs"); 
 const fs = require("fs"); 
 const PartController = require("./controllers/partController.js"); 
+const UserController = require("./controllers/userController.js"); 
 
 
 const app = express();
@@ -38,16 +39,14 @@ app.set("view engine", "hbs");
 hbs.registerPartials("./views/partials"); 
 
 // pages routing
-app.use("/contact", function(_, response){
-  response.render("contact", {
-  title: "Мои контакты",
-  email: "gavgav@mycorp.com",
-  phone: "+1234567890"
-  });
+app.use("/login", function(_, response){
+  response.render("login.hbs");
 });
+
 
 // controller routing
 app.use('/api', router); 
+// part controller
 router.get("/parts", PartController.getParts);
 router.get("/parts/search", PartController.searchParts);
 router.get("/parts/sort/:column", PartController.sortParts);
@@ -55,6 +54,10 @@ router.post("/parts", PartController.addPart);
 router.delete("/parts/:id", PartController.deletePart);
 router.put("/parts/:id", PartController.editPart);
 
+// user controller 
+router.get("/users/:name", UserController.getUserByName); 
+
+ 
 // default endpoint 
 app.use("/", function(_, response){
   response.render("catalog.hbs");
