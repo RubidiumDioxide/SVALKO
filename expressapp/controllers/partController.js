@@ -61,6 +61,25 @@ PartController.searchParts = async function(req, res){
   }
 }
 
+// GET: sort parts by provided column 
+PartController.sortParts = async function(req, res){
+  const column = req.params.column; 
+
+  console.log(column); 
+
+  try{
+    const queryRes = await ConnectAndQuery(config, 
+      `SELECT * FROM [PART]
+      ORDER BY [${column}]`); 
+    
+    res.json(queryRes);
+  }
+  catch{
+    console.error("Database query error:", error);
+        res.status(500).json({ message: 'Server Error' });
+  }
+}
+
 // POST: add a part
 PartController.addPart = async function(req, res){
   const part = req.body; 

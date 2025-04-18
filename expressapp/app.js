@@ -12,6 +12,7 @@ app.use(express.static("views"));
 
 const router = express.Router(); 
 
+// logger middleware
 app.use(function(request, response, next){
   const now = new Date();
   const hour = now.getHours();
@@ -36,13 +37,6 @@ app.engine("hbs", expressHbs.engine(
 app.set("view engine", "hbs"); 
 hbs.registerPartials("./views/partials"); 
 
-// controller routing 
-app.get("/api/parts", PartController.getParts);
-app.get("/api/parts/search", PartController.searchParts);
-app.post("/api/parts", PartController.addPart);
-app.delete("/api/parts/:id", PartController.deletePart);
-app.put("/api/parts/:id", PartController.editPart);
-
 // pages routing
 app.use("/contact", function(_, response){
   response.render("contact", {
@@ -52,27 +46,19 @@ app.use("/contact", function(_, response){
   });
 });
 
+// controller routing
+app.use('/api', router); 
+router.get("/parts", PartController.getParts);
+router.get("/parts/search", PartController.searchParts);
+router.get("/parts/sort/:column", PartController.sortParts);
+router.post("/parts", PartController.addPart);
+router.delete("/parts/:id", PartController.deletePart);
+router.put("/parts/:id", PartController.editPart);
+
+// default endpoint 
 app.use("/", function(_, response){
   response.render("catalog.hbs");
 });
 
-/*router.use("/create", function(request, response){
-  response.send("Добавление товара");
- });
-router.use("/:id", function(request, response){
-  response.send(`Товар ${request.params.id}`);
- });
- router.use("/", function(request, response){
-  response.send("Список товаров");
- });
-
- // сопоставляем роутер с конечной точкой "/products"
- app.use("/products", router);
- app.use("/about", function (request, response) {
-  response.send("О сайте");
- });
- app.use("/", function (request, response) {
-  response.send("Главная страница");
- });*/
-
+// запуск сервера 
 app.listen(3000);

@@ -120,17 +120,43 @@ async function SearchParts(e) {
     });
 }
 
+async function SortParts(e, column){
+    e.preventDefault(); 
+    
+    $.ajax({
+        url: `./api/parts/sort/${column}`, 
+        type: "GET",
+        success: function (response) {
+            console.log("Response:", response);
+    
+            const parts = response; 
+            const templateUrl = "partials/part.hbs";
+    
+            fetch(templateUrl)
+                .then(response => response.text())
+                .then(templateText => {
+                    const template = Handlebars.compile(templateText);
+    
+                    const resultHTML = parts.map(part => {
+                        return template(part); 
+                    }).join('');
+    
+                    document.getElementById("result").innerHTML = resultHTML;
+                })
+                .catch(templateError => {
+                    console.error("Template fetch error:", templateError);
+                });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
 async function AddPart(e) {
     e.preventDefault(); 
 
-    const part = {
-        name : document.getElementById("name_add_input").value,  
-        partNumber : document.getElementById("partNumber_add_input").value, 
-        manufacturer : document.getElementById("manufacturer_add_input").value, 
-        category : document.getElementById("category_add_input").value,  
-        price : document.getElementById("price_add_input").value,  
-        quantity : document.getElementById("quantity_add_input").value 
-    }
+    const part = getAddFormData();
 
     $.ajax({
         url: `./api/parts`, 
@@ -235,6 +261,19 @@ function getEditFormData(){
         Quantity : document.getElementById("Quantity_edit_input").value 
     }
 }
+
+function getAddFormData(){
+    return {
+        ID : null, 
+        Name : document.getElementById("Name_add_input").value,
+        Manufacturer : document.getElementById("Manufacturer_add_input").value,
+        PartNumber : document.getElementById("PartNumber_add_input").value,
+        Category : document.getElementById("Category_add_input").value,
+        Price : document.getElementById("Price_add_input").value,
+        Quantity : document.getElementById("Quantity_add_input").value 
+    }
+}
+
 
 // первичная загрузка 
 GetParts(); 

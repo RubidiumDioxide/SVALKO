@@ -15,10 +15,10 @@
 <button onclick="changeAddState()">Добавить деталь</button>
 
 <form id="add_form" onsubmit="AddPart(event)" >
-  <input type="text" id="name_add_input" name=" name" placeholder="название детали" value="">
-  <input type="text" id="partNumber_add_input" name="partNumber" placeholder="номер детали" value="">
-  <input type="text" id="manufacturer_add_input" name="manufacturer" placeholder="производитель" value="">
-  <select name="category" id="category_add_input">
+  <input type="text" id="Name_add_input" name=" name" placeholder="название детали" value="">
+  <input type="text" id="PartNumber_add_input" name="partNumber" placeholder="номер детали" value="">
+  <input type="text" id="Manufacturer_add_input" name="manufacturer" placeholder="производитель" value="">
+  <select name="category" id="Category_add_input">
     <option value="" disabled selected>Выберите категорию</option>
     <option value="Фильтры">Фильтры</option>
     <option value="Тормозная система и гидравлика">Тормозная система и гидравлика</option>
@@ -32,8 +32,8 @@
     <option value="Топливно-воздушная система">Топливно-воздушная система</option>
     <option value="Трансмиссия">Трансмиссия</option>
   </select>
-  <input type="text" id="price_add_input" name="price" placeholder="стоимость" value="">
-  <input type="text" id="quantity_add_input" name="quantity" placeholder="кол-во на складе" value="">
+  <input type="text" id="Price_add_input" name="price" placeholder="стоимость" value="">
+  <input type="text" id="Quantity_add_input" name="quantity" placeholder="кол-во на складе" value="">
 
   <button type="submit">Добавить</button> 
 </form>
@@ -67,16 +67,16 @@
 <!-- Реализовано в part.hbs -->
 
 <table>
-  <th>Название</th>
-  <th>Производитель</th>
-  <th>VIN</th>
-  <th>Раздел</th>
-  <th>Цена</th>
-  <th>Кол-во на складе</th>
+  <th><button onclick="SortParts(event, 'Name')">Название</button></th>
+  <th><button onclick="SortParts(event, 'Manufacturer')">Производитель</button></th>
+  <th><button onclick="SortParts(event, 'PartNumber')">VIN</button></th>
+  <th><button onclick="SortParts(event, 'Category')">Раздел</button></th>
+  <th><button onclick="SortParts(event, 'Price')">Цена</button></th>
+  <th><button onclick="SortParts(event, 'Quantity')">Кол-во на складе</button></th>
   <th></th>
   <th></th>
   <tbody id="result"></tbody>
 </table>
 
-<script src="script.js"></script>
+<script src="catalog_script.js"></script>
 
